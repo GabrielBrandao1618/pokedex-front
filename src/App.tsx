@@ -1,10 +1,11 @@
+import { ReactQueryProvider } from "./lib/react-query"
+import { Home } from "./pages/Home"
+
 function App() {
   return (
-    <div>
-      <h1 className="text-blue-500">
-        Pokedex
-      </h1>
-    </div>
+    <ReactQueryProvider>
+      <Home />
+    </ReactQueryProvider>
   )
 }
 
