@@ -8,23 +8,23 @@ interface PokeApiPkmn {
   url: string;
 }
 
-async function fetchPokemon(): Promise<Pokemon[]>{
-  const {data:rawData} = await pokeApi.get('/pokemon')
+async function fetchPokemons(): Promise<string[]>{
+  const {data: rawData} = await pokeApi.get('/pokemon')
   const data = JSON.parse(rawData)
 
-  return data.results.map(async (pokemon: PokeApiPkmn) => {
-    const {data:detailedInfo} = await axios.get(pokemon.url)
-    const sprite = detailedInfo.sprites.front_default
-    const types = detailedInfo.types.map((type: any) => type.type.name)
-    const id = detailedInfo.id
+  return data.results.map((pk: any) => pk.name)
+}
+async function fetchPokemon(name: string): Promise<Pokemon>{
+  const {data: rawData} = await pokeApi.get(`/pokemon/${name}`)
+  const data = JSON.parse(rawData)
 
-    return new Pokemon({
-      image: sprite,
-      name: pokemon.name,
-      types: types,
-      id: id
-    })
+  return new Pokemon({
+    id: data.id,
+    image: data.sprites.front_default,
+    name: name,
+    types: []
   })
 }
 
-export const usePokemon = () => useQuery('pokemon', fetchPokemon)
+export const usePokemons = () => useQuery('pokemons', fetchPokemons)
+export const usePokemon = (name: string) => useQuery(['pokemon', name], ()=> fetchPokemon(name))

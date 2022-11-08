@@ -1,13 +1,22 @@
-import { useEffect } from "react"
-import { usePokemon } from "../hooks/usePokemon"
+import { PokeCard } from "../components/PokeCard"
+import { usePokemons } from "../hooks/usePokemon"
 
 export function Home(){
-  const {data} = usePokemon()
+  const {data, isLoading} = usePokemons()
+
+  if(isLoading) return <p>Loading...</p>
 
   return (
     <div>
       <h2>Pokedex</h2>
-      {JSON.stringify(data?.map(pk => pk.name))}
+      {data?.map(pkmn => {
+        return (
+          <PokeCard 
+            name={pkmn}
+            key={pkmn}
+          />
+        )
+      })}
     </div>
   )
 }
