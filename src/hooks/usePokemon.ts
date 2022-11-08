@@ -8,11 +8,11 @@ interface PokeApiPkmn {
   url: string;
 }
 
-async function fetchPokemons(): Promise<string[]>{
-  const {data: rawData} = await pokeApi.get('/pokemon')
+async function fetchPokemons(page: number): Promise<string[]>{
+  const {data: rawData} = await pokeApi.get(`/pokemon?offset${(page*20)-20}`)
   const data = JSON.parse(rawData)
 
-  return data.results.map((pk: any) => pk.name)
+  return data.results.map((pk: PokeApiPkmn) => pk.name)
 }
 async function fetchPokemon(name: string): Promise<Pokemon>{
   const {data: rawData} = await pokeApi.get(`/pokemon/${name}`)
@@ -26,5 +26,5 @@ async function fetchPokemon(name: string): Promise<Pokemon>{
   })
 }
 
-export const usePokemons = () => useQuery('pokemons', fetchPokemons)
+export const usePokemons = (page=1) => useQuery(['pokemons', page], () => fetchPokemons(page))
 export const usePokemon = (name: string) => useQuery(['pokemon', name], ()=> fetchPokemon(name))
