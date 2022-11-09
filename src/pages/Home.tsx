@@ -3,7 +3,7 @@ import { PokeCard } from "../components/PokeCard"
 import { usePokemons } from "../hooks/usePokemon"
 
 export function Home(){
-  const [currentPage, setCurrentPage] = useState(3)
+  const [currentPage, setCurrentPage] = useState(1)
   const {data, isLoading} = usePokemons(currentPage)
 
   function changePage(num: number) {

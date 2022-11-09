@@ -11,7 +11,7 @@ interface PokeApiPkmn {
 const FETCH_COUNT=15
 
 async function fetchPokemons(page: number): Promise<string[]>{
-  const {data} = await pokeApi.get(`/pokemon?offset=${(page*FETCH_COUNT)-FETCH_COUNT}`)
+  const {data} = await pokeApi.get(`/pokemon?offset=${(page*FETCH_COUNT)-FETCH_COUNT}&limit=${FETCH_COUNT}`)
 
   return data.results.map((pk: PokeApiPkmn) => pk.name)
 }
