@@ -22,7 +22,9 @@ async function fetchPokemon(name: string): Promise<Pokemon>{
     id: data.id,
     image: data.sprites.front_default,
     name: name,
-    types: []
+    types: data.types.map((t1:any) => {
+      return t1.type.name
+    })
   })
 }
 
