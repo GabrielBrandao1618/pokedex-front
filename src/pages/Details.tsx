@@ -1,4 +1,5 @@
 import {useParams} from 'react-router-dom'
+import { TypeLabel } from '../components/TypeLabel'
 import { usePokemon } from '../hooks/usePokemon'
 
 export function Details(){
@@ -12,13 +13,25 @@ export function Details(){
   if(isLoading) return <p>Loading...</p>
   if(isError) return <p>Error</p>
   return (
-    <div>
-      <h2 className="text-white text-5xl font-bold">
-        {pokemon}
-      </h2>
-      <img 
-        src={data.image}
-      />
+    <div className="flex flex-col items-center justify-center h-screen">
+      <div className="max-w-[500px] w-full flex flex-col">
+        <h2 className="text-white text-5xl font-bold w-full text-center">
+          {pokemon}
+        </h2>
+        <img 
+          src={data.image}
+        />
+        <div className="flex gap-2">
+          {data.types.map(type => {
+            return (
+              <TypeLabel 
+                name={type}
+                key={type}
+              />
+            )
+          })}
+        </div>
+      </div>
     </div>
   )
 }
