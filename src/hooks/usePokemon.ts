@@ -9,14 +9,12 @@ interface PokeApiPkmn {
 }
 
 async function fetchPokemons(page: number): Promise<string[]>{
-  const {data: rawData} = await pokeApi.get(`/pokemon?offset${(page*20)-20}`)
-  const data = JSON.parse(rawData)
+  const {data} = await pokeApi.get(`/pokemon?offset${(page*20)-20}`)
 
   return data.results.map((pk: PokeApiPkmn) => pk.name)
 }
 async function fetchPokemon(name: string): Promise<Pokemon>{
-  const {data: rawData} = await pokeApi.get(`/pokemon/${name}`)
-  const data = JSON.parse(rawData)
+  const {data} = await pokeApi.get(`/pokemon/${name}`)
 
   return new Pokemon({
     id: data.id,
