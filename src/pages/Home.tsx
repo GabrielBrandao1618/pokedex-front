@@ -1,8 +1,14 @@
+import { useState } from "react"
 import { PokeCard } from "../components/PokeCard"
 import { usePokemons } from "../hooks/usePokemon"
 
 export function Home(){
-  const {data, isLoading} = usePokemons()
+  const [currentPage, setCurrentPage] = useState(3)
+  const {data, isLoading} = usePokemons(currentPage)
+
+  function changePage(num: number) {
+    setCurrentPage(currentPage+num)
+  }
 
   if(isLoading) return <p>Loading...</p>
 
@@ -21,6 +27,15 @@ export function Home(){
           )
         })}
       </div>
+      <button onClick={e => changePage(-1)}>
+        Previous page
+      </button>
+      <span>
+        Current page: {currentPage}
+      </span>
+      <button onClick={e => changePage(1)}>
+        Next page
+      </button>
     </div>
   )
 }
