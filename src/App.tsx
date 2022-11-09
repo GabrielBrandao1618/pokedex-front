@@ -1,10 +1,15 @@
+import {BrowserRouter} from 'react-router-dom'
+
 import { ReactQueryProvider } from "./lib/react-query"
-import { Home } from "./pages/Home"
+
+import { MainRoutes } from "./routes/main.routes"
 
 function App() {
   return (
     <ReactQueryProvider>
-      <Home />
+      <BrowserRouter>
+        <MainRoutes />
+      </BrowserRouter>
     </ReactQueryProvider>
   )
 }
