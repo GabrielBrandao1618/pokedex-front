@@ -14,7 +14,7 @@ export function Home(){
 
   return (
     <div>
-      <h1 className="text-gray-100 font-bold text-5xl w-full text-center">
+      <h1 className="text-rose-700 font-bold text-5xl w-full text-center">
         Pokedex
       </h1>
       <div className="flex w-full flex-wrap p-4 justify-around">
@@ -30,13 +30,13 @@ export function Home(){
       <div className="w-full flex justify-center items-center gap-2">
         <button 
           onClick={e => changePage(-1)}
-          className="bg-white rounded font-bold px-2 py-1"
+          className="bg-gray-800 text-gray-100 rounded font-bold px-2 py-1"
         >
           Previous page
         </button>
         <button 
           onClick={e => changePage(1)}
-          className="bg-white rounded font-bold px-2 py-1"
+          className="bg-gray-800 text-gray-100 rounded font-bold px-2 py-1"
         >
           Next page
         </button>
