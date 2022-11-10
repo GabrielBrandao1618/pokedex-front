@@ -27,15 +27,20 @@ export function Home(){
           )
         })}
       </div>
-      <button onClick={e => changePage(-1)}>
-        Previous page
-      </button>
-      <span>
-        Current page: {currentPage}
-      </span>
-      <button onClick={e => changePage(1)}>
-        Next page
-      </button>
+      <div className="w-full flex justify-center items-center gap-2">
+        <button 
+          onClick={e => changePage(-1)}
+          className="bg-white rounded font-bold px-2 py-1"
+        >
+          Previous page
+        </button>
+        <button 
+          onClick={e => changePage(1)}
+          className="bg-white rounded font-bold px-2 py-1"
+        >
+          Next page
+        </button>
+      </div>
     </div>
   )
 }
